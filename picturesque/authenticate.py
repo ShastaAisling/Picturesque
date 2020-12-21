@@ -1,3 +1,5 @@
+# This module holds all of the authentication helpers and main loop for log in
+
 def reset_password(auth):
     while (True):
         try:
@@ -41,16 +43,17 @@ def auth_loop(auth):
         try:
             user = authenticate(auth)
             print("Login successful!")
+            return user
         except:
-            return SystemExit
+            raise SystemExit
     elif int(answer) == 2:
         user = create_account(auth)
         auth.send_email_verification(user['idToken'])
         print("Email verification set. Please restart application to log in.")
-        return SystemExit
+        raise SystemExit
 
     elif int(answer) == 3:
         reset_password(auth)
         print("Password reset email has been sent. Please restart the application to log in.")
-        return SystemExit
+        raise SystemExit
 
