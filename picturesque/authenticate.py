@@ -1,7 +1,7 @@
 # This module holds all of the authentication helpers and main loop for log in
 
 def reset_password(auth):
-    while (True):
+    while True:
         try:
             email = input("Enter email: ")
             auth.send_password_reset_email(email)
@@ -11,7 +11,7 @@ def reset_password(auth):
 
 
 def create_account(auth):
-    while (True):
+    while True:
         email = input("Enter email: ")
         password = input("Enter password: ")
         try:
@@ -19,6 +19,7 @@ def create_account(auth):
             return user
         except:
             print("An error occured. Please try again.")
+
 
 def authenticate(auth):
     attempt = 0
@@ -32,6 +33,7 @@ def authenticate(auth):
             print("Incorrect email/password. Please try again.")
             attempt += 1
     raise Exception("Out of login attempts. Please restart application.")
+
 
 def auth_loop(auth):
     # Ask to create new account, login, or reset password
@@ -56,4 +58,3 @@ def auth_loop(auth):
         reset_password(auth)
         print("Password reset email has been sent. Please restart the application to log in.")
         raise SystemExit
-

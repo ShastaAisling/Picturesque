@@ -10,6 +10,7 @@ config = {
     "storageBucket": "image-repo-for-shopify.appspot.com"
 }
 
+
 # Main program loop
 def main():
     # Configure firebase
@@ -31,7 +32,6 @@ def main():
         raise SystemExit
 
     storage_loop(user, storage, db)
-
 
 
 if __name__ == '__main__':
