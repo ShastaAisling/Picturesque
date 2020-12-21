@@ -18,7 +18,7 @@ def add_picture_to_storage(user, storage):
         # Upload image to repository
         id = user['localId']
         storage.child("user/{}/{}".format(id, filename)).put(filepath, user['idToken'])
-        print("File %s uploaded successfully!", filename)
+        print("File {} uploaded successfully!".format(filename))
     except TypeError:
         print("File is not a .jpg or .png. Please try again.")
     except:
