@@ -1,10 +1,7 @@
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
+from picturesque.tagging import tag_image
 import os
-
-
-def get_tag(filepath):
-    return "None"
 
 def add_picture_to_storage(user, storage, db):
     # Open dialog to select image
@@ -14,13 +11,14 @@ def add_picture_to_storage(user, storage, db):
     # Get name of image
     filename, fileext = os.path.splitext(filepath)
     filename = filename.split('/')[len(filename.split('/')) - 1]
+
     try:
         # Verify the file is an image (jpg or png)
         if fileext != ".jpg" and fileext != ".png":
             raise TypeError
 
         # Run through tagging AI
-        tag = get_tag(filepath)
+        tag = tag_image(filepath)
 
         # Upload image to repository
         user_id = user['localId']
