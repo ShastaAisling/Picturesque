@@ -10,8 +10,5 @@ prediction.loadModel()
 
 
 def tag_image(filepath):
-    predictions, percentage_probabilities = prediction.predictImage(filepath, result_count=5)
-    for index in range(len(predictions)):
-        print(predictions[index], " : ", percentage_probabilities[index])
-
+    predictions, percentage_probabilities = prediction.predictImage(filepath, result_count=1)
     return predictions[0]

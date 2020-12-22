@@ -1,6 +1,7 @@
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
 from picturesque.tagging import tag_image
+from picturesque.search import search_by_tag
 import os
 
 def add_picture_to_storage(user, storage, db):
@@ -41,6 +42,8 @@ def storage_loop(user, storage, db):
         answer = input("Enter one of the options above: ")
         if int(answer) == 1:
             add_picture_to_storage(user, storage, db)
+        elif int(answer) == 2:
+            search_by_tag(user['localId'], db)
         elif int(answer) == 4:
             print("Exiting program.")
             return
