@@ -27,9 +27,8 @@ def main():
     user = None
     try:
         user = auth_loop(auth)
-        # print(auth.get_account_info(user['idToken']))
-    except:
-        raise SystemExit
+    except SystemExit:
+        return 0
 
     storage_loop(user, storage, db)
 

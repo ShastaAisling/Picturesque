@@ -1,7 +1,7 @@
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
 from picturesque.tagging import tag_image
-from picturesque.search import search_by_tag
+from picturesque.search import search_loop
 import os
 
 def add_picture_to_storage(user, storage, db):
@@ -28,7 +28,7 @@ def add_picture_to_storage(user, storage, db):
 
         # Add metadata to database
         data = {filename : tag}
-        db.child("users").child(user_id).child("image-tag").set(data)
+        db.child("users/{}/image-tag/".format(user_id)).update(data)
 
     except TypeError:
         print("File is not a .jpg or .png. Please try again.")
@@ -38,14 +38,14 @@ def add_picture_to_storage(user, storage, db):
 
 def storage_loop(user, storage, db):
     while True:
-        print("Options: 1 - Upload file, 2 - Search tag, 3 - Search filename, 4 - Quit")
+        print("Options: 1 - Upload file, 2 - Search files, 3 - Quit")
         answer = input("Enter one of the options above: ")
         if int(answer) == 1:
             add_picture_to_storage(user, storage, db)
         elif int(answer) == 2:
-            search_by_tag(user['localId'], db)
-        elif int(answer) == 4:
+            search_loop(user, storage, db)
+        elif int(answer) == 3:
             print("Exiting program.")
             return
         else:
-            print("Not implemented yet.")
+            print("Please enter one of the options (1, 2, or 3).")
