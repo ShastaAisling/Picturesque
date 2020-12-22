@@ -1,5 +1,6 @@
 from imageai.Prediction import ImagePrediction
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 execution_path = os.getcwd()
 prediction = ImagePrediction()

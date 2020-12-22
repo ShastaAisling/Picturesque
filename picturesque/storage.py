@@ -12,9 +12,6 @@ def add_picture_to_storage(user, storage, db):
     filename, fileext = os.path.splitext(filepath)
     filename = filename.split('/')[len(filename.split('/')) - 1]
 
-    # Get tag for image
-    tag = tag_image(filepath)
-
     try:
         # Verify the file is an image (jpg or png)
         if fileext != ".jpg" and fileext != ".png":
