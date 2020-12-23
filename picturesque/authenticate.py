@@ -53,8 +53,10 @@ def auth_loop(auth):
         auth.send_email_verification(user['idToken'])
         print("Email verification set. Please restart application to log in.")
         raise SystemExit
-
     elif int(answer) == 3:
         reset_password(auth)
         print("Password reset email has been sent. Please restart the application to log in.")
         raise SystemExit
+    else:
+        print("Please enter one of the options (1, 2, or 3).")
+
