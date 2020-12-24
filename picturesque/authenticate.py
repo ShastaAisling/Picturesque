@@ -32,31 +32,43 @@ def authenticate(auth):
         except:
             print("Incorrect email/password. Please try again.")
             attempt += 1
-    raise Exception("Out of login attempts. Please restart application.")
+    raise PermissionError
 
 
 def auth_loop(auth):
-    # Ask to create new account, login, or reset password
-    print("Options: 1 - Login, 2 - Sign up, 3 - Reset Password")
-    answer = input("Enter one of the options above: ")
-    user = None
-    if int(answer) == 1:
-        # Log the user in
+    while True:
+        # Ask to create new account, login, or reset password
+        print("Options: 1 - Login, 2 - Sign up, 3 - Reset Password, 4 - Quit")
+        answer = input("Enter one of the options above: ")
+        user = None
+        int_answer = None
+
         try:
-            user = authenticate(auth)
-            print("Login successful!")
-            return user
-        except:
+            int_answer = int(answer)
+        except ValueError:
+            print("Only numeric input is allowed.")
+
+        if int_answer == 1:
+            # Log the user in
+            try:
+                user = authenticate(auth)
+                print("Login successful!")
+                return user
+            except PermissionError:
+                print("Out of login attempts. Please restart application.")
+                raise SystemExit
+        elif int_answer == 2:
+            user = create_account(auth)
+            auth.send_email_verification(user['idToken'])
+            print("Email verification set. Please restart application to log in.")
             raise SystemExit
-    elif int(answer) == 2:
-        user = create_account(auth)
-        auth.send_email_verification(user['idToken'])
-        print("Email verification set. Please restart application to log in.")
-        raise SystemExit
-    elif int(answer) == 3:
-        reset_password(auth)
-        print("Password reset email has been sent. Please restart the application to log in.")
-        raise SystemExit
-    else:
-        print("Please enter one of the options (1, 2, or 3).")
+        elif int_answer == 3:
+            reset_password(auth)
+            print("Password reset email has been sent. Please restart the application to log in.")
+            raise SystemExit
+        elif int_answer == 4:
+            print("Exiting.")
+            raise SystemExit
+        else:
+            print("Please enter one of the options (1, 2, 3, or 4).")
 
