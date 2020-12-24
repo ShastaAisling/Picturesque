@@ -35,16 +35,26 @@ def add_picture_to_storage(user, storage, db):
     except:
         print("Something went wrong. File not uploaded.")
 
+def download_image(user, storage):
+    user_id = user['localId']
+    image_name = input("Name of file (without .jpg or .png): ")
+    try:
+        file_ref = "user/{}/{}".format(user_id, image_name)
+        storage.child(file_ref).download(image_name)
+    except:
+        print("Download failed. Did you enter an existing file?")
 
 def storage_loop(user, storage, db):
     while True:
-        print("Options: 1 - Upload file, 2 - Search files, 3 - Quit")
+        print("Options: 1 - Upload file, 2 - Search files, 3 - Download image, 4 - Quit")
         answer = input("Enter one of the options above: ")
         if int(answer) == 1:
             add_picture_to_storage(user, storage, db)
         elif int(answer) == 2:
             search_loop(user, storage, db)
         elif int(answer) == 3:
+            download_image(user, storage)
+        elif int(answer) == 4:
             print("Exiting program.")
             return
         else:
