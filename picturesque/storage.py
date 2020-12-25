@@ -56,7 +56,7 @@ def download_image(user, storage):
 
 def storage_loop(user, storage, db):
     while True:
-        print("Options: 1 - Upload file, 2 - Search files, 3 - Download image, 4 - Quit")
+        print("Options: 1 - Upload image, 2 - Search images, 3 - Download image, 4 - Quit")
         answer = input("Enter one of the options above: ")
         if int(answer) == 1:
             add_picture_to_storage(user, storage, db)

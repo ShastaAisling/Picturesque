@@ -32,7 +32,7 @@ def pretty_print_results(all_images):
 
 
 def search_loop(user, storage, db):
-    print("Options: 1 - List all files, 2 - Search tag, 3 - Search filename, 4 - Exit")
+    print("Options: 1 - List all images, 2 - Search tag, 3 - Search filename, 4 - Exit")
     answer = input("Enter one of the options above: ")
     if int(answer) == 1:
         list_all(user['localId'], db)
