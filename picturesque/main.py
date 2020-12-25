@@ -24,7 +24,6 @@ def main():
     storage = fb.storage()
 
     # Run authentication loop
-    user = None
     try:
         user = auth_loop(auth)
     except SystemExit:
