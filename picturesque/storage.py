@@ -4,16 +4,20 @@ from picturesque.tagging import tag_image
 from picturesque.search import search_loop
 import os
 
+
 def add_picture_to_storage(user, storage, db):
-    # Open dialog to select image
-    Tk().withdraw()
-    filepath = askopenfilename()
-
-    # Get name of image
-    filename, fileext = os.path.splitext(filepath)
-    filename = filename.split('/')[len(filename.split('/')) - 1]
-
     try:
+        # Open dialog to select image
+        root = Tk()
+        root.withdraw()
+        filepath = askopenfilename()
+        root.update()
+        if (not filepath): raise FileExistsError
+
+        # Get name of image
+        filename, fileext = os.path.splitext(filepath)
+        filename = filename.split('/')[len(filename.split('/')) - 1]
+
         # Verify the file is an image (jpg or png)
         if fileext != ".jpg" and fileext != ".png":
             raise TypeError
@@ -27,22 +31,28 @@ def add_picture_to_storage(user, storage, db):
         print("File {} uploaded successfully!".format(filename))
 
         # Add metadata to database
-        data = {filename : tag}
+        data = {filename: tag}
         db.child("users/{}/image-tag/".format(user_id)).update(data)
 
     except TypeError:
         print("File is not a .jpg or .png. Please try again.")
+    except FileExistsError:
+        print("No file selected.")
     except:
         print("Something went wrong. File not uploaded.")
 
+
 def download_image(user, storage):
+    # Get image name
     user_id = user['localId']
     image_name = input("Name of file (without .jpg or .png): ")
     try:
+        # Try to download image
         file_ref = "user/{}/{}".format(user_id, image_name)
         storage.child(file_ref).download(image_name)
     except:
         print("Download failed. Did you enter an existing file?")
+
 
 def storage_loop(user, storage, db):
     while True:
