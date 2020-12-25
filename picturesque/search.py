@@ -1,5 +1,6 @@
 import json
 
+
 def list_all(user_id, db):
     try:
         all_images = db.child("users").child(user_id).child("image-tag").get().val()
@@ -7,6 +8,7 @@ def list_all(user_id, db):
     except:
         all_images = "No images exist."
         print(all_images)
+
 
 def search_by_tag(user_id, db):
     query = input("Search for: ")
@@ -17,6 +19,7 @@ def search_by_tag(user_id, db):
         all_images = "No images exist with this tag."
         print(all_images)
 
+
 def search_by_name(user_id, db):
     query = input("Search for: ")
     try:
@@ -26,12 +29,13 @@ def search_by_name(user_id, db):
         all_images = "No images exist with this name."
         print(all_images)
 
+
 def pretty_print_results(all_images):
     print("Name : Tag")
     print(json.dumps(all_images, indent=4))
 
 
-def search_loop(user, storage, db):
+def search_loop(user, db):
     print("Options: 1 - List all images, 2 - Search tag, 3 - Search filename, 4 - Exit")
     answer = input("Enter one of the options above: ")
     if int(answer) == 1:
@@ -45,4 +49,3 @@ def search_loop(user, storage, db):
         return
     else:
         print("Please enter one of the options (1, 2, 3, or 4).")
-

@@ -40,7 +40,6 @@ def auth_loop(auth):
         # Ask to create new account, login, or reset password
         print("Options: 1 - Login, 2 - Sign up, 3 - Reset Password, 4 - Quit")
         answer = input("Enter one of the options above: ")
-        user = None
         int_answer = None
 
         try:
@@ -71,4 +70,3 @@ def auth_loop(auth):
             raise SystemExit
         else:
             print("Please enter one of the options (1, 2, 3, or 4).")
-

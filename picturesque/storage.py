@@ -12,7 +12,7 @@ def add_picture_to_storage(user, storage, db):
         root.withdraw()
         filepath = askopenfilename()
         root.update()
-        if (not filepath): raise FileExistsError
+        if not filepath: raise FileExistsError
 
         # Get name of image
         filename, fileext = os.path.splitext(filepath)
@@ -52,6 +52,9 @@ def download_image(user, storage):
         storage.child(file_ref).download(image_name)
     except:
         print("Download failed. Did you enter an existing file?")
+        return
+
+    print("Download succeeded!")
 
 
 def storage_loop(user, storage, db):
@@ -61,7 +64,7 @@ def storage_loop(user, storage, db):
         if int(answer) == 1:
             add_picture_to_storage(user, storage, db)
         elif int(answer) == 2:
-            search_loop(user, storage, db)
+            search_loop(user, db)
         elif int(answer) == 3:
             download_image(user, storage)
         elif int(answer) == 4:
