@@ -18,7 +18,13 @@ def search_by_tag(user_id, db):
         print(all_images)
 
 def search_by_name(user_id, db):
-    return 0
+    query = input("Search for: ")
+    try:
+        all_images = db.child("users").child(user_id).child("image-tag").order_by_key().equal_to(query).get().val()
+        pretty_print_results(all_images)
+    except:
+        all_images = "No images exist with this name."
+        print(all_images)
 
 def pretty_print_results(all_images):
     print("Name : Tag")
