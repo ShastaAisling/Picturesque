@@ -1,5 +1,5 @@
 from tkinter import Tk
-from tkinter.filedialog import askopenfilename
+from tkinter.filedialog import askopenfilename, asksaveasfilename
 from picturesque.tagging import tag_image
 from picturesque.search import search_loop
 import os
@@ -48,27 +48,38 @@ def download_image(user, storage):
     image_name = input("Name of file (without .jpg or .png): ")
     try:
         # Try to download image
+        root = Tk()
+        root.withdraw()
+        filepath = asksaveasfilename(defaultextension=".jpg")
         file_ref = "user/{}/{}".format(user_id, image_name)
-        storage.child(file_ref).download(image_name)
+        storage.child(file_ref).download(filepath)
+        root.update()
+        if os.path.isfile(filepath):
+            print("Download succeeded!")
+        else:
+            raise FileExistsError
     except:
         print("Download failed. Did you enter an existing file?")
         return
 
-    print("Download succeeded!")
+
 
 
 def storage_loop(user, storage, db):
     while True:
         print("Options: 1 - Upload image, 2 - Search images, 3 - Download image, 4 - Quit")
         answer = input("Enter one of the options above: ")
-        if int(answer) == 1:
-            add_picture_to_storage(user, storage, db)
-        elif int(answer) == 2:
-            search_loop(user, db)
-        elif int(answer) == 3:
-            download_image(user, storage)
-        elif int(answer) == 4:
-            print("Exiting program.")
-            return
-        else:
-            print("Please enter one of the options (1, 2, or 3).")
+        try:
+            if int(answer) == 1:
+                add_picture_to_storage(user, storage, db)
+            elif int(answer) == 2:
+                search_loop(user, db)
+            elif int(answer) == 3:
+                download_image(user, storage)
+            elif int(answer) == 4:
+                print("Exiting program.")
+                return
+            else:
+                print("Please enter one of the options (1, 2, 3, or 4).")
+        except ValueError:
+            print("Please enter one of the options (1, 2, 3, or 4).")

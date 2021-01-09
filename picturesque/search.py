@@ -38,14 +38,18 @@ def pretty_print_results(all_images):
 def search_loop(user, db):
     print("Options: 1 - List all images, 2 - Search tag, 3 - Search filename, 4 - Exit")
     answer = input("Enter one of the options above: ")
-    if int(answer) == 1:
-        list_all(user['localId'], db)
-    elif int(answer) == 2:
-        search_by_tag(user['localId'], db)
-    elif int(answer) == 3:
-        search_by_name(user['localId'], db)
-    elif int(answer) == 4:
-        print("Exiting program.")
-        return
-    else:
+    try:
+        if int(answer) == 1:
+            list_all(user['localId'], db)
+        elif int(answer) == 2:
+            search_by_tag(user['localId'], db)
+        elif int(answer) == 3:
+            search_by_name(user['localId'], db)
+        elif int(answer) == 4:
+            print("Exiting program.")
+            return
+        else:
+            print("Please enter one of the options (1, 2, 3, or 4).")
+    except ValueError:
         print("Please enter one of the options (1, 2, 3, or 4).")
+
