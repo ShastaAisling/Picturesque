@@ -23,13 +23,13 @@ $ ./run.sh
 
 ## Tech used in this mini-project:
 
-Python:
+**Python**:
 This program is written in Python 3.8. I have been using a lot of Python to complete assignments in my upper-year courses, for example in my recent AI course, so I'm well familiarized with the language. Python also holds a special place in my heart because it was the first language I taught myself to code in when I was a kid!
 
-Firebase API:
+**Firebase API**:
 This program uses the Authentication, Storage, and Database hosted on Google's Firebase service. I use an API wrapper, called Pyrebase, to communicate with the service.
 
-Tensorflow and Machine Learning:
+**Tensorflow and Machine Learning**:
 I recently completed an AI course, so I thought it might be fun to add an AI element to this project. Although, in the interest of time and not wanting to reinvent the wheel, I used an open source image recognition package called Image AI to add a tag to each photo when you upload them to your account in this app. See https://github.com/OlafenwaMoses/ImageAI.
 
 
