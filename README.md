@@ -10,12 +10,14 @@ Make sure you have Python 3.8 installed, as well as pip3.
 
 1. Download the source code from this repo as a zip file, and unzip the file to your desired location.
 2. Navigate to the top folder (Picturesque/). Allow run.sh to be executable:
-
+```
 $ chmod +x run.sh
+```
 
 3. Run the script:
-
+```
 $ ./run.sh
+```
 
 *Note: There are quite a few dependencies that need to be installed. This may take a few minutes.* 
 
