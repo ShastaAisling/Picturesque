@@ -4,7 +4,7 @@ Picturesque is a command-line application that allows you to upload, store, down
 
 ## Prerequisites
 
-Make sure you have Python 3.8 installed, as well as pip3.
+This application only runs on Unix/Linux (one potential improvement I could make in the future is to make this app available as an .exe). Make sure you have Python 3.8 installed, as well as pip3.
 
 ## How to use
 
